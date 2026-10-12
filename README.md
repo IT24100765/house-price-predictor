@@ -232,12 +232,30 @@ Before final submission, document:
 
 **Group repository:** [https://github.com/IT24100765/house-price-predictor](https://github.com/IT24100765/house-price-predictor)
 
-| Member | Student ID | Contribution |
-|---|---|---|
-| Fikry MAA | IT24100444 | Feature Engineering, Feature Selection & Analysis |
-| [Name] | [Student ID] | [Assigned contribution] |
-| [Name] | [Student ID] | [Assigned contribution] |
-| [Name] | [Student ID] | [Assigned contribution] |
+| Member | Student ID | Assigned Contribution | Status |
+|---|---|---|---|
+| Kajanthini V | IT24100423 | Business Problem, Dataset, EDA & Data Quality | Planned, Assigned |
+| Senadheera P.V.S.T | IT24102257 | Preprocessing, Leakage, Outliers & Missing Values | Planned, Assigned |
+| Fikry M.A.A | IT24100444 | Feature Engineering, Feature Selection & Analysis | Planned, Assigned |
+| Perera S.A.L.N | IT24100765 | Model Selection, Training, Model Evaluation, Hyperparameter Tuning & Integration (.pkl) + experiments | Planned, Assigned |
+
+### Member Responsibilities and Scope
+
+- **Kajanthini V (IT24100423)** — *Business Problem, Dataset, EDA & Data Quality*
+  - **Ownership:** Own business problem and problem definition, dataset understanding, exploratory data analysis, data-quality assessment, and evidence/experiments.
+  - **Deliverables:** Business problem; problem definition; dataset overview; EDA; target and relationship analysis; data-quality findings; evidence/experiments.
+
+- **Senadheera P.V.S.T (IT24102257)** — *Preprocessing, Leakage, Outliers & Missing Values*
+  - **Ownership:** Own the data preprocessing strategy, data-leakage analysis, outlier and missing-value decisions, and preprocessing evidence/experiments.
+  - **Deliverables:** Preprocessing pipeline; leakage checks; missing-value strategy; outlier decisions; encoding/scaling; evidence/experiments.
+
+- **Fikry M.A.A (IT24100444)** — *Feature Engineering, Feature Selection & Analysis*
+  - **Ownership:** Own feature construction, feature selection, feature comparison, feature analysis, and evidence/experiments supporting the final feature set.
+  - **Deliverables:** Engineered features; feature-selection comparison; feature analysis; selected feature set; evidence/experiments.
+
+- **Perera S.A.L.N (IT24100765)** — *Model Selection, Training, Model Evaluation, Hyperparameter Tuning & Integration (.pkl) + experiments*
+  - **Ownership:** Own model selection and training, baseline and candidate model comparison, cross-validation, hyperparameter tuning, model evaluation, model diagnostics, final model fitting, and integration of the final pipeline.
+  - **Deliverables:** Baseline/candidate models; MAE/RMSE/R² comparison; model tournament; cross-validation; GridSearchCV tuning; learning-curve/residual analysis; final model; prediction generation; saved model artifact and integration test; evidence/experiments.
 
 ## Acknowledgements
 
