@@ -12,7 +12,7 @@ A machine learning project that estimates residential property selling prices us
 | Primary metric | Mean Absolute Error (MAE) |
 | Supporting metrics | Root Mean Squared Error (RMSE) and R-squared (R²) |
 | Dataset | Ames Housing / Kaggle House Prices: Advanced Regression Techniques |
-| Repository | [Add the group GitHub repository link] |
+| Repository | [IT24100765/house-price-predictor](https://github.com/IT24100765/house-price-predictor) |
 
 ## Problem Statement
 
@@ -230,11 +230,12 @@ Before final submission, document:
 
 ## Team and Repository
 
-**Group repository:** [Add repository URL]
+**Group repository:** [https://github.com/IT24100765/house-price-predictor](https://github.com/IT24100765/house-price-predictor)
 
 | Member | Student ID | Contribution |
 |---|---|---|
-| [Name] | [Student ID] | Feature Engineering, Feature Selection & Analysis |
+| Fikry MAA | IT24100444 | Feature Engineering, Feature Selection & Analysis |
+| [Name] | [Student ID] | [Assigned contribution] |
 | [Name] | [Student ID] | [Assigned contribution] |
 | [Name] | [Student ID] | [Assigned contribution] |
 
