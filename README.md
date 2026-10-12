@@ -231,7 +231,7 @@ Before final submission, document:
 ## Team and Repository
 
 **Group repository:** [https://github.com/IT24100765/house-price-predictor](https://github.com/IT24100765/house-price-predictor)
-
+git 
 | Member | Student ID | Assigned Contribution | Status |
 |---|---|---|---|
 | Kajanthini V | IT24100423 | Business Problem, Dataset, EDA & Data Quality | Planned, Assigned |
