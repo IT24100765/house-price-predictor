@@ -1,0 +1,70 @@
+{
+  "neighborhoods": [
+    "Blmngtn",
+    "Blueste",
+    "BrDale",
+    "BrkSide",
+    "ClearCr",
+    "CollgCr",
+    "Crawfor",
+    "Edwards",
+    "Gilbert",
+    "IDOTRR",
+    "MeadowV",
+    "Mitchel",
+    "NAmes",
+    "NPkVill",
+    "NWAmes",
+    "NoRidge",
+    "NridgHt",
+    "OldTown",
+    "SWISU",
+    "Sawyer",
+    "SawyerW",
+    "Somerst",
+    "StoneBr",
+    "Timber",
+    "Veenker"
+  ],
+  "house_styles": [
+    "1.5Fin",
+    "1.5Unf",
+    "1Story",
+    "2.5Fin",
+    "2.5Unf",
+    "2Story",
+    "SFoyer",
+    "SLvl"
+  ],
+  "building_types": [
+    "1Fam",
+    "2fmCon",
+    "Duplex",
+    "Twnhs",
+    "TwnhsE"
+  ],
+  "overall_qual_range": [
+    1,
+    10
+  ],
+  "overall_cond_range": [
+    1,
+    10
+  ],
+  "year_built_range": [
+    1872,
+    2010
+  ],
+  "living_area_range": [
+    334,
+    5642
+  ],
+  "lot_area_range": [
+    1300,
+    215245
+  ],
+  "total_bsmt_range": [
+    0,
+    6110
+  ]
+}
