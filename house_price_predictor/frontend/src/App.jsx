@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useEffectEvent, useMemo } from 'react';
 import { 
   Home, 
   Sparkles, 
@@ -17,8 +17,8 @@ import {
   Clock
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { requestApi } from './api';
 
-const BACKEND_URL = 'http://localhost:5000';
 const CURRENT_YEAR = 2026;
 
 const DEFAULT_FORM = {
@@ -132,34 +132,34 @@ export default function App() {
     };
   }, [formData.YearBuilt, formData.YearRemodAdd]);
 
-  // Check backend health & fetch presets on load
+  // Check backend health & fetch presets on load.
   useEffect(() => {
-    checkBackendHealth();
-    const interval = setInterval(checkBackendHealth, 8000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const checkBackendHealth = async () => {
-    try {
-      const res = await fetch(`${BACKEND_URL}/api/meta`);
-      if (res.ok) {
-        const data = await res.json();
-        setBackendOnline(true);
-        if (data.presets && data.presets.length > 0) {
-          setPresets(data.presets);
+    let active = true;
+    const checkBackendHealth = async () => {
+      try {
+        const data = await requestApi('meta');
+        if (!active) return;
+        if (Array.isArray(data.presets)) {
+          setBackendOnline(true);
+          if (data.presets && data.presets.length > 0) {
+            setPresets(data.presets);
+          }
+        } else {
+          setBackendOnline(false);
         }
-      } else {
+      } catch (err) {
+        if (!active) return;
         setBackendOnline(false);
+        setErrorMsg(err.message);
       }
-    } catch {
-      setBackendOnline(false);
-    }
-  };
-
-  // Perform initial prediction when backend is detected or on mount
-  useEffect(() => {
-    handlePredict(formData);
-  }, [backendOnline]);
+    };
+    checkBackendHealth();
+    const interval = setInterval(checkBackendHealth, 65000);
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleChange = (field, value) => {
     setFormData(prev => {
@@ -191,17 +191,12 @@ export default function App() {
     setErrorMsg('');
 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/predict`, {
+      const result = await requestApi('predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToPredict)
       });
 
-      if (!response.ok) {
-        throw new Error(`Server returned status ${response.status}`);
-      }
-
-      const result = await response.json();
       if (result.success) {
         setPrediction(result);
         if (result.predicted_price > 300000) {
@@ -212,26 +207,13 @@ export default function App() {
           });
         }
       } else {
+        setPrediction(null);
         setErrorMsg(result.error || 'Failed to calculate price');
       }
     } catch (err) {
-      console.warn('Backend request error, calculating simulated fallback:', err);
-      // Graceful fallback simulation while backend is booting
-      const baseArea = dataToPredict.GrLivArea || 1600;
-      const qual = dataToPredict.OverallQual || 6;
-      const yr = dataToPredict.YearBuilt || 2000;
-      const approx = Math.round((baseArea * 95) + (qual * 18000) + ((yr - 1950) * 800));
-      setPrediction({
-        predicted_price: approx,
-        formatted_price: `$${approx.toLocaleString()}`,
-        price_range: {
-          low: Math.round(approx * 0.95),
-          high: Math.round(approx * 1.05),
-          formatted_low: `$${Math.round(approx * 0.95).toLocaleString()}`,
-          formatted_high: `$${Math.round(approx * 1.05).toLocaleString()}`
-        },
-        price_per_sqft: Math.round(approx / baseArea)
-      });
+      setPrediction(null);
+      setBackendOnline(false);
+      setErrorMsg(err.message);
     } finally {
       setLoading(false);
     }
@@ -242,6 +224,13 @@ export default function App() {
     setActivePreset('suburban');
     handlePredict(DEFAULT_FORM);
   };
+
+  const predictCurrentForm = useEffectEvent(() => handlePredict(formData));
+
+  // Predict with the current inputs when the backend becomes available.
+  useEffect(() => {
+    if (backendOnline) predictCurrentForm();
+  }, [backendOnline]);
 
   return (
     <div className="app-container">
@@ -267,7 +256,7 @@ export default function App() {
               background: backendOnline ? '#34d399' : '#fbbf24',
               boxShadow: backendOnline ? '0 0 10px #34d399' : '0 0 10px #fbbf24'
             }}></span>
-            {backendOnline ? 'ML Pipeline Model Active' : 'Connecting to Python Backend (Port 5000)...'}
+            {backendOnline ? 'ML Pipeline Model Active' : 'Backend unavailable — retrying connection...'}
           </div>
         </div>
       </header>

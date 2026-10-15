@@ -1,5 +1,11 @@
 # React + Vite
 
+## Backend connection
+
+Set `VITE_BACKEND_URL` to the deployed Python backend's public HTTPS base URL in Netlify's environment settings, with availability during builds. Vite embeds this setting when it builds the frontend, so changing it requires a new deployment. Do not put credentials or API keys in this variable: Vite configuration is included in browser assets.
+
+The frontend calls `/api/meta` and `/api/predict` on that backend. A trailing slash or `/api` suffix is accepted. Local development uses port 5000 when the variable is absent; production requires an explicitly configured HTTPS backend. Connection and configuration failures appear in the interface instead of producing simulated prices.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:
